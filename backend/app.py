@@ -1,3 +1,23 @@
+import os
+import urllib.request
+
+def download_if_missing(url, filename):
+    if not os.path.exists(filename):
+        print(f"Downloading {filename}...")
+        urllib.request.urlretrieve(url, filename)
+        print(f"Downloaded {filename}.")
+
+# Download files if needed
+download_if_missing(
+    "https://github.com/snehab03/resume_matcher/releases/download/v1.0/job_embeddings.pt",
+    "job_embeddings.pt"
+)
+
+download_if_missing(
+    "https://github.com/snehab03/resume_matcher/releases/download/v1.0/Jobs.csv",
+    "Jobs.csv"
+)
+
 from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from sentence_transformers import SentenceTransformer, util
